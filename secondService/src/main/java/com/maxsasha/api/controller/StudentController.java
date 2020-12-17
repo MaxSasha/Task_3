@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.maxsasha.api.controller.StudentController;
 import com.maxsasha.api.dto.StudentDto;
 import com.maxsasha.entity.Student;
 import com.maxsasha.service.StudentService;
@@ -24,14 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
 public class StudentController {
-	private final StudentService service;
+	private final StudentService studentService;
 
 	@PostMapping
 	public ResponseEntity<Object> create(@RequestBody StudentDto studentDto) {
 		log.info("Received request to create Student with info: midleName: {}, lastName: {}", studentDto.getMidleName(),
 				studentDto.getLastName());
 		try {
-			return ResponseEntity.status(201).body(service.create(transform(studentDto)));
+			return ResponseEntity.status(201).body(studentService.create(transform(studentDto)));
 		} catch (JsonProcessingException ex) {
 			log.error("Error to parse entity to json in create method. With info: exception message:{}", ex);
 			return ResponseEntity.status(505).build();
@@ -43,7 +42,7 @@ public class StudentController {
 		log.info("Received request to update Student with info: id:{}, midleName:{}, lastName:{}", id,
 				studentDto.getMidleName(), studentDto.getLastName());
 		try {
-			Student student = service.edit(transform(studentDto), id);
+			Student student = studentService.update(transform(studentDto), id);
 			return ResponseEntity.status(200).body(transform(student));
 		} catch (JsonProcessingException ex) {
 			log.error("Error to parse entity to json in update method. With info: student id:{}, exception message:{}",
