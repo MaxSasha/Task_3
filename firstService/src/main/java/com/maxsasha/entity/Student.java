@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Document("students")
 public class Student {
-	@Id
-	private String id;
-	private String fisrtName;
-	private String midleName;
-	private String lastName;
+    @Id
+    private String id;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 }

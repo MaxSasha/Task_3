@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.maxsasha.entity.Student;
 
-@Repository("studentRepository")
-public interface StudentRepository extends MongoRepository<Student, String> {
-	Page<Student> findAll(Pageable pageable);
+@Repository
+public interface StudentRepository extends MongoRepository<Student, String>, StudentRepositoryCustom {
+    Page<Student> findAll(Pageable pageable);
 }

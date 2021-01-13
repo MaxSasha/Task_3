@@ -13,11 +13,12 @@ public class StudentService {
 	private final StudentRepository studentRepository;
 
 	public Student create(Student student) {
-		return studentRepository.insert(student);
+	    return studentRepository.insert(student);
 	}
 
 	public Student edit(Student student, String id) {
 		student.setId(id);
-		return studentRepository.save(student);
+		studentRepository.updateDocumentLastName(id, student.getLastName());
+		return student;
 	}
 }

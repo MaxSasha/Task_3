@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class ThirdServiceStudentDto {
-	@Id
-	private String id;
-	private String lastName;
+    @Id
+    private String id;
+    private String lastName;
 }

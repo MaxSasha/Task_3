@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class StudentDto {
-	private String id;
-	private String firstName;
-	private String midleName;
-	private String lastName;
+    private String id;
+    private String firstName;
+    private String middleName;
+    private String lastName;
 }

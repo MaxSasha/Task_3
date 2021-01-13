@@ -1,6 +1,7 @@
 package com.maxsasha.entity;
 
 import org.springframework.data.annotation.Id;
+//import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +15,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Document("students")
 public class Student {
-	@Id
-	private String id;
-	private String midleName;
-	private String lastName;
+    @Id
+    private String id;
+    private String middleName;
+    private String lastName;
 }

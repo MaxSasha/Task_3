@@ -29,43 +29,43 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
 public class StudentController {
-	private final StudentService studentService;
+    private final StudentService studentService;
 
-	@GetMapping
-	public Page<Student> get(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
-		log.info("Received request to get students. Page size: {}, current Page: {}", size, page);
-		return studentService.getUsers(PageRequest.of(page, size));
-	}
+    @GetMapping
+    public Page<Student> get(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
+        log.info("Received request to get students. Page size: {}, current Page: {}", size, page);
+        return studentService.getUsers(PageRequest.of(page, size));
+    }
 
-	@PostMapping
-	public ResponseEntity<Object> post(@RequestBody StudentDto studentDto) {
-		log.info("Received request to create Student with info: firstName: {}, midleName: {}, lastName: {}",
-				studentDto.getFirstName(), studentDto.getMidleName(), studentDto.getLastName());
-		try {
-			return ResponseEntity.status(201).body(transform(studentService.create(transform(studentDto))));
-		} catch (JsonProcessingException ex) {
-			log.error("Error to parse entity to json in post method. exception message:{}", ex);
-			return ResponseEntity.status(505).build();
-		}
-	}
+    @PostMapping
+    public ResponseEntity<Object> post(@RequestBody StudentDto studentDto) {
+        log.info("Received request to create Student with info: firstName: {}, middleName: {}, lastName: {}",
+                studentDto.getFirstName(), studentDto.getMiddleName(), studentDto.getLastName());
+        try {
+            return ResponseEntity.status(201).body(transform(studentService.create(transform(studentDto))));
+        } catch (JsonProcessingException ex) {
+            log.error("Error to parse entity to json in post method. exception message:{}", ex);
+            return ResponseEntity.status(505).build();
+        }
+    }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Object> put(@PathVariable String id, @RequestBody StudentDto studentDto) {
-		log.info("Received request to update Student with info: id:{}, firstName:{}, midleName:{}, lastName:{}", id,
-				studentDto.getFirstName(), studentDto.getMidleName(), studentDto.getLastName());
-		try {
-			Student student = studentService.update(transform(studentDto), id);
-			return ResponseEntity.status(200).body(transform(student));
-		} catch (JsonProcessingException ex) {
-			log.error("Error to parse entity to json in update method. With info: student id:{}, exception message:{}",
-					id, ex);
-			return ResponseEntity.status(505).build();
-		}
-	}
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody StudentDto studentDto) {
+        log.info("Received request to update Student with info: id:{}, firstName:{}, middleName:{}, lastName:{}", id,
+                studentDto.getFirstName(), studentDto.getMiddleName(), studentDto.getLastName());
+        try {
+            Student student = studentService.update(transform(studentDto), id);
+            return ResponseEntity.status(200).body(transform(student));
+        } catch (JsonProcessingException ex) {
+            log.error("Error to parse entity to json in update method. With info: student id:{}, exception message:{}",
+                    id, ex);
+            return ResponseEntity.status(505).build();
+        }
+    }
 
-	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") String id) {
-		log.info("Received request to delete student id: {}", id);
-		studentService.delete(id);
-	}
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") String id) {
+        log.info("Received request to delete student id: {}", id);
+        studentService.delete(id);
+    }
 }

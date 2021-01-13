@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maxsasha.api.dto.StudentDto;
+import com.maxsasha.entity.Student;
 import com.maxsasha.service.StudentService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,9 @@ public class StudentController {
 	@PostMapping
 	public StudentDto create(@RequestBody StudentDto studentDto) {
 		log.info("Received request to create student with info: lastName: {}", studentDto.getLastName());
-		return transform(studentService.create(transform(studentDto)));
+		Student student = studentService.create(transform(studentDto));
+        log.info("Create student third service: "+student );
+		return transform(student);
 	}
 
 	@PutMapping("/{id}")

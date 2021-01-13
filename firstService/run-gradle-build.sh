@@ -1,0 +1,1 @@
+cd ./firstService/ && gradle build
