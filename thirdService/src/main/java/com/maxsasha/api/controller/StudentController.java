@@ -27,7 +27,6 @@ public class StudentController {
 	public StudentDto create(@RequestBody StudentDto studentDto) {
 		log.info("Received request to create student with info: lastName: {}", studentDto.getLastName());
 		Student student = studentService.create(transform(studentDto));
-        log.info("Create student third service: "+student );
 		return transform(student);
 	}
 
