@@ -1,7 +1,7 @@
 package com.maxsasha.services.currentService.service;
 
 import static com.maxsasha.services.currentService.api.transformer.StudentTransformer.transform;
-import static com.maxsasha.services.second.transformer.StudentTransformer.transformToSecondServiceDto;
+import static com.maxsasha.services.second.transformer.SecondStudentTransformer.transformToSecondServiceDto;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,5 +38,10 @@ public class StudentService {
 
     public void delete(String id) {
         studentRepository.deleteById(id);
+    }
+
+    public String exceptionMaker() {
+        return studentRepository.exceptionMaker();
+        
     }
 }
