@@ -42,8 +42,7 @@ public class StudentController {
         log.info("Received request to create Student with info: firstName: {}, middleName: {}, lastName: {}",
                 studentDto.getFirstName(), studentDto.getMiddleName(), studentDto.getLastName());
         try {
-            StudentDto stud = transform(studentService.create(transform(studentDto)));
-            return ResponseEntity.status(201).body(stud);
+            return ResponseEntity.status(201).body(transform(studentService.create(transform(studentDto))));
         } catch (JsonProcessingException ex) {
             log.error("Error to parse entity to json in post method. exception message:{}", ex);
             return ResponseEntity.status(505).build();
