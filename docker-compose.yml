@@ -1,0 +1,46 @@
+services:
+  mongodb:
+    container_name: test
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    command: ["mongod"]
+    networks:
+      - task-3-network
+  first-service:
+    container_name: firstService
+    build: ./firstService/
+    environment:
+      - SERVER_PORT=8081
+      - MONGODB_URI=mongodb://mongodb:27017/test
+      - SECOND_SERVICE_URL=secondService:8082
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb
+    networks:
+      - task-3-network
+  second-service:
+    container_name: secondService
+    build: ./secondService/
+    environment:
+      - SERVER_PORT=8082
+      - MONGODB_URI=mongodb://mongodb:27017/test
+      - THIRD_SERVICE_URL=thirdService:8083
+    depends_on:
+      - mongodb
+    networks:
+      - task-3-network
+  third-service:
+    container_name: thirdService
+    build: ./thirdService/
+    environment:
+      - SERVER_PORT=8083
+      - MONGODB_URI=mongodb://mongodb:27017/test
+    depends_on:
+      - mongodb
+    networks:
+      - task-3-network
+networks:
+   task-3-network:
+       driver: bridge
